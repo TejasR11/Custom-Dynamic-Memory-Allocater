@@ -233,8 +233,6 @@ int main(int argc, char **argv)
 	/* temporaries used to compute the performance index */
 	double secs, ops, util, avg_mm_util, avg_mm_throughput = 0, p1, p2, perfindex;
 	double weight = 0;
-	int numcorrect;
-
 
 	setbuf(stdout, 0);
 	setbuf(stderr, 0);
@@ -382,14 +380,11 @@ int main(int argc, char **argv)
 	secs = 0;
 	ops = 0;
 	util = 0;
-	numcorrect = 0;
 	for (i=0; i < num_tracefiles; i++) {
 		secs += mm_stats[i].secs * mm_stats[i].weight;
 		ops += mm_stats[i].ops * mm_stats[i].weight;
 		util += mm_stats[i].util * mm_stats[i].weight;
 		weight += mm_stats[i].weight;
-		if (mm_stats[i].valid)
-			numcorrect++;
 	}
 	free(mm_stats);
 	if(weight == 0)
