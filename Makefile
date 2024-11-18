@@ -18,13 +18,10 @@ else
   endif
 endif
 
-all: bin/mdriver-implicit bin/mdriver-explicit
+all: bin/mdriver-explicit
 
 bin/mdriver-%: out/mdriver-%.o out/mm-%.o out/memlib.o out/fsecs.o out/fcyc.o out/clock.o
 	$(CC) $(CFLAGS) $^ -o $@
-
-out/mdriver-implicit.o: driver/mdriver.c
-	$(CC) $(CFLAGS) -c -DSTAGE0 $^ -o $@
 
 out/mdriver-explicit.o: driver/mdriver.c
 	$(CC) $(CFLAGS) -c -DSTAGE1 $^ -o $@
@@ -38,4 +35,4 @@ out/%.o: driver/%.c
 clean:
 	$(CLEAN_COMMAND)
 
-.PRECIOUS: bin/mdriver-% out/mdriver-implicit.o out/mdriver-explicit.o out/%.o
+.PRECIOUS: bin/mdriver-% out/mdriver-explicit.o out/%.o
